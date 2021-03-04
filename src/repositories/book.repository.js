@@ -6,7 +6,8 @@ class BookFlightsRepository {
         let { cosmosdb_name, cosmosdb_key, cosmosdb_url, database_name } = options;
         cosmosdb_url = cosmosdb_url  || `${cosmosdb_name}.documents.azure.com:10255`;
         database_name = database_name  || 'admin';
-        const connectionString = `mongodb://${cosmosdb_name}:${encodeURIComponent(cosmosdb_key)}@${cosmosdb_url}/${database_name}?ssl=true&replicaSet=globaldb`;
+        //const connectionString = `mongodb://${cosmosdb_name}:${encodeURIComponent(cosmosdb_key)}@${cosmosdb_url}/${database_name}?ssl=true&replicaSet=globaldb`;
+        const connectionString = `'mongodb://localhost:27017/local`;
         mongoose.connect(connectionString, { useNewUrlParser: true });
         mongoose.Promise = global.Promise;
     }

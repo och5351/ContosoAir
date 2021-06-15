@@ -48,9 +48,9 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         stage('Clone repository') {
             container('git') {
                 // https://gitlab.com/gitlab-org/gitlab-foss/issues/38910
-                checkout([$class: 'GitSCM',
-                    branches: [[name: '*/dockerizing']],
-                    userRemoteConfigs: [
+                checkout([$class: 'GitSCM',*/
+                    //branches: [[name: '*/dockerizing']],
+                    /*userRemoteConfigs: [
                         [url: 'https://github.com/och5351/ContosoAir.git']//, credentialsId: 'gitlab-account']
                     ],
                 ])

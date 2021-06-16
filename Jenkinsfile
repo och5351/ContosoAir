@@ -49,7 +49,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
             container('git') {
                 // https://gitlab.com/gitlab-org/gitlab-foss/issues/38910
                 checkout([$class: 'GitSCM',
-                    branches: [[name: '*/dockerizing']],
+                    branches: [[name: '*/master']],
                     userRemoteConfigs: [
                         [url: 'https://github.com/och5351/ContosoAir.git']//, credentialsId: 'gitlab-account']
                     ],

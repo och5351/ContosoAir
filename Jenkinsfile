@@ -75,7 +75,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         stage('Build docker image') {
             container('docker') {
                 withDockerRegistry([ /*credentialsId: "$registryCredential",*/ url: "http://$registry" ]) {
-                    sh "docker build -t $registry/sampleapp:1.0 -f ./Dockerfile ."
+                    sh "docker build -t $registry -f ./Dockerfile ."
                 }
             }
         }
@@ -83,7 +83,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         stage('Push docker image') {
             container('docker') {
                 withDockerRegistry([ /*credentialsId: "$registryCredential",*/ url: "http://$registry" ]) {
-                    docker.image("$registry/sampleapp:1.0").push()
+                    docker.image("$registry").push()
                 }
             }
         }

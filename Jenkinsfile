@@ -59,7 +59,8 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         
         stage('build the source code via npm') {
             container('node') {
-                sh 'npm install &amp;&amp; npm build'
+                sh 'npm install
+                sh 'npm build'
             }
         }
         

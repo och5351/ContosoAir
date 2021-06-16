@@ -12,12 +12,13 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
       command: 'cat',
       ttyEnabled: true
     ),
+    /*
     containerTemplate(
       name: 'maven', // container 에 maven 설정
       image: 'maven:3.6.2-jdk-8',
       command: 'cat',
       ttyEnabled: true
-    ),
+    ),*/
     containerTemplate(
       name: 'node', // container 에 node 설정
       image: 'node:8.16.2-alpine3.10',
@@ -63,14 +64,14 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                 sh 'npm build'
             }
         }
-        
+        /*
         stage('build the source code via maven') {
             container('maven') {
                 sh 'mvn package'
                 sh 'bash build.sh'
             }
         }
-
+        */
         stage('Build docker image') {
             container('docker') {
                 withDockerRegistry([ /*credentialsId: "$registryCredential",*/ url: "http://$registry" ]) {

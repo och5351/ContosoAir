@@ -44,19 +44,19 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
           * jenkins scm document
             * https://www.jenkins.io/doc/pipeline/steps/workflow-scm-step/
         */
-        /* jenkins Clone Stage는 Jenkins 내부에서 구현
+        // jenkins Clone Stage는 Jenkins 내부에서 구현
         stage('Clone repository') {
             container('git') {
                 // https://gitlab.com/gitlab-org/gitlab-foss/issues/38910
-                checkout([$class: 'GitSCM',*/
-                    //branches: [[name: '*/dockerizing']],
-                    /*userRemoteConfigs: [
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/dockerizing']],
+                    userRemoteConfigs: [
                         [url: 'https://github.com/och5351/ContosoAir.git']//, credentialsId: 'gitlab-account']
                     ],
                 ])
             }
         }
-        */
+        
         stage('build the source code via npm') {
             container('node') {
                 sh 'npm install &amp;&amp; npm build'

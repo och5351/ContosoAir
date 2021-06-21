@@ -87,7 +87,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                }
               
               stage('Push image') {
-                 docker.withRegistry('https://hub.docker.com/repository/docker/och5351/kubernetes_test', 'docker-hub') {
+                 docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
                      app.push("${env.BUILD_NUMBER}")
                      app.push("latest")
                  }

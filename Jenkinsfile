@@ -84,11 +84,16 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                 }*/
              
                  app = docker.build("och5351/kubernetes_test")
-                 docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
+                 
+            }
+        }
+      stage('push docker image') {
+            container('docker') {
+              docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
                      app.push("${env.BUILD_NUMBER}")
                      app.push("latest")
                  }
             }
-        }
+      }
     }   
 }

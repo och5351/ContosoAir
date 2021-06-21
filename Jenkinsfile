@@ -82,14 +82,15 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                 withDockerRegistry([ credentialsId: "$registryCredential", url: "http://$registry" ]) {
                     sh "docker build -t $registry -f ./Dockerfile ."
                 }*/
-              withCredentials([usernamePassword(
-                  //credentialsId: 'docker_hub_auth',
-                  usernameVariable: 'och5351',
-                  passwordVariable: 'WEstart03@(')]) {
-                      /* ./build/libs 생성된 jar파일을 도커파일을 활용하여 도커 빌드를 수행한다 */
-                      sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
-                      sh "docker login -u ${USERNAME} -p ${PASSWORD}"
-                      sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"
+              stage('Build image') {
+                   app = docker.build("och5351/kubernetes_test")
+               }
+              
+              stage('Push image') {
+                 docker.withRegistry('https://hub.docker.com/repository/docker/och5351/kubernetes_test', 'docker-hub') {
+                     app.push("${env.BUILD_NUMBER}")
+                     app.push("latest")
+                 }
               }
             }
         }

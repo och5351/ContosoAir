@@ -40,6 +40,10 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
 {
     node('jenkins-slave-pod') {  // 상위에 node 작성 'jenkins-slave-pod' 
         def registry = "hub.docker.com/repository/docker/och5351/kubernetes_test" // docker 저장소
+        def DOCKER_IMAGE_NAME = "och5351/kubernetes_test"           // 생성하는 Docker image 이름
+        def DOCKER_IMAGE_TAGS = "test_app"  // 생성하는 Docker image 태그
+        def DOCKER_CONTAINER_NAME = "frontend-app-container"    // 생성하는 Docker Container 이름
+        def NAMESPACE = "ns-jenkins"
         //def registryCredential = "nexus3-docker-registry"
         /*
           * jenkins scm document
@@ -74,17 +78,19 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         */
         stage('Build docker image') {
             container('docker') {
-                withDockerRegistry([ /*credentialsId: "$registryCredential",*/ url: "http://$registry" ]) {
+              /*
+                withDockerRegistry([ credentialsId: "$registryCredential", url: "http://$registry" ]) {
                     sh "docker build -t $registry -f ./Dockerfile ."
-                }
-            }
-        }
-
-        stage('Push docker image') {
-            container('docker') {
-                withDockerRegistry([ /*credentialsId: "$registryCredential",*/ url: "http://$registry" ]) {
-                    docker.image("$registry").push()
-                }
+                }*/
+              withCredentials([usernamePassword(
+                  credentialsId: 'docker_hub_auth',
+                  usernameVariable: 'USERNAME',
+                  passwordVariable: 'PASSWORD')]) {
+                      /* ./build/libs 생성된 jar파일을 도커파일을 활용하여 도커 빌드를 수행한다 */
+                      sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
+                      sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                      sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"
+              }
             }
         }
     }   

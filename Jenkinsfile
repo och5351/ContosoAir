@@ -46,12 +46,12 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
 
 {
     node('jenkins-slave-pod') {  // 상위에 node 작성 'jenkins-slave-pod' 
-        def registry = "hub.docker.com/repository/docker/och5351/kubernetes_test" // docker 저장소
         def DOCKER_IMAGE_NAME = "och5351/kubernetes_test"           // 생성하는 Docker image 이름
         def DOCKER_IMAGE_TAGS = "test_app"  // 생성하는 Docker image 태그
         def NAMESPACE = "ns-jenkins"
         def USERNAME = "och5351"
         def PASSWORD = "SWEETlove!%38"
+        def DATE = new Date();
         //def registryCredential = "nexus3-docker-registry"
         /*
           * jenkins scm document

@@ -1,5 +1,5 @@
 #어떤 이미지로부터 새로운 이미지를 생성할지를 지정
-FROM node:6.2.2
+FROM node:8.16.2-alpine3.10
 
 VOLUME /tmp
 

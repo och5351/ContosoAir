@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: batch-visualizer-auth
-          image: och5351/kubernetes_test:batch-visualizer-auth
+          image: och5351/kubernetes_test:test_app
           ports:
             - containerPort: 8080
           imagePullPolicy: Always

@@ -121,7 +121,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                             --docker-server=https://index.docker.io/v1/ \
                             --docker-username=${USERNAME} \
                             --docker-password=${PASSWORD} \
-                            --docker-email=ekfrl2815@gmail.com \
+                            --docker-email=dhcksgo5319@naver.com \
                             -n ${NAMESPACE}
                         """
                         /* k8s-deployment.yaml 의 env값을 수정해준다(DATE로). 배포시 수정을 해주지 않으면 변경된 내용이 정상 배포되지 않는다. */

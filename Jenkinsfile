@@ -102,6 +102,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                 }
             }
         }
+      
       stage('Run kubectl') {
             container('kubectl') {
                 withCredentials([usernamePassword(

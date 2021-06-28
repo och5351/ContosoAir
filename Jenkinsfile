@@ -32,6 +32,12 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
       command: 'cat',
       ttyEnabled: true
     ),
+    containerTemplate(
+      name: 'kubectl', 
+      image: 'lachlanevenson/k8s-kubectl:v1.15.3', 
+      command: 'cat', 
+      ttyEnabled: true
+    ),
   ],
   volumes: [ 
     hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'), 
@@ -43,7 +49,6 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         def registry = "hub.docker.com/repository/docker/och5351/kubernetes_test" // docker 저장소
         def DOCKER_IMAGE_NAME = "och5351/kubernetes_test"           // 생성하는 Docker image 이름
         def DOCKER_IMAGE_TAGS = "test_app"  // 생성하는 Docker image 태그
-        def DOCKER_CONTAINER_NAME = "frontend-app-container"    // 생성하는 Docker Container 이름
         def NAMESPACE = "ns-jenkins"
         //def registryCredential = "nexus3-docker-registry"
         /*
@@ -77,18 +82,27 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
             }
         }
         */
-        stage('Build docker image') {
+        stage('Docker build') {
             container('docker') {
               /*
                 withDockerRegistry([ credentialsId: "$registryCredential", url: "http://$registry" ]) {
                     sh "docker build -t $registry -f ./Dockerfile ."
                 }*/
              
-                 app = docker.build("och5351/kubernetes_test")
+                 //app = docker.build("och5351/kubernetes_test")
                  
+              withCredentials([usernamePassword(
+                    credentialsId: 'docker-hub',
+                    usernameVariable: 'och5351',
+                    passwordVariable: 'SWEETlove!%38')]) {
+                        /* ./build/libs 생성된 jar파일을 도커파일을 활용하여 도커 빌드를 수행한다 */
+                        sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS} ."
+                        sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                        sh "docker push ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAGS}"
+                }
             }
         }
-      stage('push docker image') {
+      stage('Run kubectl') {
             container('docker') {
               docker.withRegistry('https://registry.hub.docker.com', 'docker-hub') {
                      app.push("${env.BUILD_NUMBER}")

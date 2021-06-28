@@ -50,7 +50,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         def DOCKER_IMAGE_NAME = "och5351/kubernetes_test"           // 생성하는 Docker image 이름
         def DOCKER_IMAGE_TAGS = "test_app"  // 생성하는 Docker image 태그
         def NAMESPACE = "ns-jenkins"
-        def USERNAME = "och5351",
+        def USERNAME = "och5351"
         def PASSWORD = "SWEEETlove!%38"
         //def registryCredential = "nexus3-docker-registry"
         /*

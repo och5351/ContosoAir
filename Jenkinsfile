@@ -3,6 +3,7 @@
      * https://www.jenkins.io/doc/pipeline/steps/kubernetes/#podtemplate-define-a-podtemplate-to-use-in-the-kubernetes-plugin
    * 예제 Groovy code 
      * https://tech.osci.kr/2019/11/21/86026733/
+     test
 */
 podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
   containers: [
@@ -11,7 +12,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
       image: 'alpine/git',
       command: 'cat',
       ttyEnabled: true
-    ),
+    ), 
     /*
     containerTemplate(
       name: 'maven', // container 에 maven 설정

@@ -131,6 +131,8 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                         sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
                         sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
                 }
+            }
       }
+      
     }   
 }

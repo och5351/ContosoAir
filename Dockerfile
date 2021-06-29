@@ -16,7 +16,7 @@ RUN npm install
 ENV NODE_ENV development
 
 #가상 머신에 오픈할 포트
-EXPOSE 8080 80 8082
+#EXPOSE 8080 80 8082
 
 #컨테이너에서 실행될 명령을 지정
 CMD ["npm", "start"]

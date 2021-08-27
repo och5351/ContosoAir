@@ -1,20 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-#  name: batch-visualizer-auth-deployment
-  name: ContosoAir_APP
+  name: ContosoAir-deployment
+  labels:
+    app: ContosoAir
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: batch-visualizer-auth
+      app: ContosoAir
   template:
     metadata:
       labels:
-        app: batch-visualizer-auth
+        app: ContosoAir
     spec:
       containers:
-        - name: batch-visualizer-auth
+        - name: ContosoAir
           image: och5351/kubernetes_test:test_app
           ports:
             - containerPort: 8080

@@ -133,8 +133,8 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                         /* yaml파일로 배포를 수행한다 */
                         // sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
                         // sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
-                        sh "kubectl delete -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
-                        sh "kubectl delete -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
+                        sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
+                        sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
                 }
             }
       }

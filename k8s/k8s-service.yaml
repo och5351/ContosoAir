@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ContosoAir-service
+  name: contoso-air-service
 spec:
   ports:
     - name: "8080"
       port: 8082
       targetPort: 8080
   selector:
-    app: ContosoAir
+    app: contoso-air
   type: NodePort

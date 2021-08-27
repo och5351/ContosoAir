@@ -1,21 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ContosoAir-deployment
-  labels:
-    app: ContosoAir
+  name: contoso-air-deployment
 spec:
   replicas: 5
   selector:
     matchLabels:
-      app: ContosoAir
+      app: contoso-air
   template:
     metadata:
       labels:
-        app: ContosoAir
+        app: contoso-air
     spec:
       containers:
-        - name: ContosoAir
+        - name: contoso-air
           image: och5351/kubernetes_test:test_app
           ports:
             - containerPort: 8080

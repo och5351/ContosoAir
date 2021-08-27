@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: batch-visualizer-auth-deployment
+#  name: batch-visualizer-auth-deployment
+  name: ContosoAir_APP
 spec:
   replicas: 5
   selector:

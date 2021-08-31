@@ -48,7 +48,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
     node('jenkins-slave-pod') {  // 상위에 node 작성 'jenkins-slave-pod' 
         def DOCKER_IMAGE_NAME = "och5351/kubernetes_test"           // 생성하는 Docker image 이름
         def DOCKER_IMAGE_TAGS = "test_app"  // 생성하는 Docker image 태그
-        def NAMESPACE = "ns-jenkins"
+        def NAMESPACE = "contoso-air"
         def USERNAME = "och5351"
         def PASSWORD = "SWEETlove!%38"
         def DATE = new Date();
@@ -133,6 +133,8 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                         sh "sed -i.bak 's#DATE_STRING#${DATE}#' ./k8s/k8s-deployment.yaml"
 
                         /* yaml파일로 배포를 수행한다 */
+                        // sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
+                        // sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
                         sh "kubectl apply -f ./k8s/k8s-deployment.yaml -n ${NAMESPACE}"
                         sh "kubectl apply -f ./k8s/k8s-service.yaml -n ${NAMESPACE}"
                 }

@@ -73,6 +73,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         stage('build the source code via npm') {
             container('node') {
                 sh 'npm install'
+                sh 'SET %COSMOS_DB_NAME%=168.61.40.247:27017'
                 sh 'npm build'
             }
         }
@@ -114,7 +115,8 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
                         /* namespace 존재여부 확인. 미존재시 namespace 생성 */
                         sh "kubectl get ns ${NAMESPACE}|| kubectl create ns ${NAMESPACE}"
 
-                        /* secret 존재여부 확인. 미존재시 secret 생성 */
+                        /* secret 존재여부 확인
+                        . 미존재시 secret 생성 */
                         sh """
                             kubectl get secret my-secret -n ${NAMESPACE} || \
                             kubectl create secret docker-registry my-secret \

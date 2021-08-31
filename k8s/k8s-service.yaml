@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: contoso-air-service
 spec:
+  sessionAffinity: ClientIP
   ports:
     - name: "8080"
       port: 8082

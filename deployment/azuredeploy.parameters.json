@@ -12,7 +12,7 @@
 			"value": "web"
 		},
 		"p_comosdb_name":{
-			"value": "168.61.40.247:27017"
+			"value": "db"
 		}
 	}
 }

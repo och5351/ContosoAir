@@ -24,7 +24,7 @@
 	},
 	"variables": {
 		"site_web_name": "[concat(parameters('p_site_prefix'), parameters('p_separator'), parameters('p_site_web_name'), parameters('p_separator'), parameters('p_environment'))]",
-		"comosdb_default_name": "168.61.40.247:27017"
+		"comosdb_default_name": "[concat(parameters('p_site_prefix'), parameters('p_separator'), parameters('p_comosdb_name'), parameters('p_separator'), parameters('p_environment'))]"
 	},
 	"resources": [
 		{
@@ -62,6 +62,10 @@
 						{
 							"name": "COSMOS_DB_NAME",
 							"value":"[variables('comosdb_default_name')]"
+						},
+						{
+							"name": "COSMOS_DB_AUTH_KEY",
+							"value": "[listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('comosdb_default_name')), '2015-04-08').primaryMasterKey]"
 						},
 						{
 							"name": "WEBSITE_NODE_DEFAULT_VERSION",

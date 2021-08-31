@@ -64,10 +64,6 @@
 							"value":"[variables('comosdb_default_name')]"
 						},
 						{
-							"name": "COSMOS_DB_AUTH_KEY",
-							"value": "[listKeys(resourceId('Microsoft.DocumentDb/databaseAccounts', variables('comosdb_default_name')), '2015-04-08').primaryMasterKey]"
-						},
-						{
 							"name": "WEBSITE_NODE_DEFAULT_VERSION",
 							"value": "8.9.4"
 						}

@@ -24,7 +24,7 @@
 	},
 	"variables": {
 		"site_web_name": "[concat(parameters('p_site_prefix'), parameters('p_separator'), parameters('p_site_web_name'), parameters('p_separator'), parameters('p_environment'))]",
-		"comosdb_default_name": "[concat(parameters('p_site_prefix'), parameters('p_separator'), parameters('p_comosdb_name'), parameters('p_separator'), parameters('p_environment'))]"
+		"comosdb_default_name": "168.61.40.247:27017"
 	},
 	"resources": [
 		{

@@ -73,7 +73,7 @@ podTemplate(label: 'jenkins-slave-pod',  //jenkins slave pod name
         stage('build the source code via npm') {
             container('node') {
                 sh 'npm install'
-                sh 'SET %COSMOS_DB_NAME%=168.61.40.247:27017'
+                //sh 'SET %COSMOS_DB_NAME%=168.61.40.247:27017'
                 sh 'npm build'
             }
         }
